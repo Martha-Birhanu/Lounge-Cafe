@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './AuthModal.css';
-import { apiFetch } from '../../services/api';
+import apiFetch from '../../services/api';
 
 const AuthModal = ({ isOpen, onClose, mode = 'login' }) => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './AdminMenu.css';
-import { apiFetch } from '../../services/api';
+import apiFetch from '../../services/api';
 
 const initialFormState = {
   name: '',

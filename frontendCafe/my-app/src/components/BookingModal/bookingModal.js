@@ -31,7 +31,7 @@
 
 import React, { useState } from 'react';
 import './bookingModal.css';
-import { apiFetch } from '../../services/api';
+import apiFetch from '../../services/api';
 
 const BookingModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
