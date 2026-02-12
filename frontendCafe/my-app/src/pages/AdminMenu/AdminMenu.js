@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './AdminMenu.css';
-import apiFetch from '../../services/api';
+import apiFetch from '../../services/api';  // your default-export helper
 
 const initialFormState = {
   name: '',
@@ -20,21 +20,17 @@ const AdminMenu = () => {
   const [editingId, setEditingId] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
 
-  const API_BASE = '/api/foods';
-
   const fetchItems = async () => {
     try {
       setLoading(true);
       setError('');
-      const res = await apiFetch(API_BASE);
-      if (!res.ok) {
-        throw new Error('Failed to fetch menu items');
-      }
-      const data = await res.json();
+
+      const data = await apiFetch('/foods');  // apiFetch adds base URL automatically
+
       setItems(data);
     } catch (err) {
-      console.error(err);
-      setError('Failed to load menu items. Make sure the backend server is running.');
+      console.error('Fetch items error:', err);
+      setError(err.message || 'Failed to load menu items. Check backend.');
     } finally {
       setLoading(false);
     }
@@ -46,10 +42,7 @@ const AdminMenu = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleEdit = (item) => {
@@ -74,22 +67,17 @@ const AdminMenu = () => {
   };
 
   const handleDelete = async (id) => {
-    try {
-      const res = await fetch(`${API_BASE}/${id}`, {
-        method: 'DELETE'
-      });
+    if (!window.confirm('Are you sure you want to delete this item?')) return;
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.message || 'Failed to delete item');
-      }
+    try {
+      await apiFetch(`/foods/${id}`, { method: 'DELETE' });
 
       setSuccess('Item deleted successfully');
       setDeleteConfirm(null);
       fetchItems();
       setTimeout(() => setSuccess(''), 3000);
     } catch (err) {
-      console.error(err);
+      console.error('Delete error:', err);
       setError(err.message || 'Failed to delete item');
       setDeleteConfirm(null);
     }
@@ -124,42 +112,20 @@ const AdminMenu = () => {
       setSubmitting(true);
 
       if (editingId) {
-        // Update existing item
-        const res = await fetch(`${API_BASE}/${editingId}`, {
+        // Update
+        await apiFetch(`/foods/${editingId}`, {
           method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
           body: JSON.stringify(payload)
         });
-
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          throw new Error(data.message || 'Failed to update menu item');
-        }
 
         setSuccess('Menu item updated successfully!');
         setEditingId(null);
       } else {
-        // Create new item
-        const res = await fetch(API_BASE, {
+        // Create
+        await apiFetch('/foods', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
           body: JSON.stringify(payload)
         });
-
-        if (res.status === 409) {
-          const data = await res.json();
-          setError(data.message || 'Item already exists');
-          return;
-        }
-
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          throw new Error(data.message || 'Failed to create menu item');
-        }
 
         setSuccess('Menu item created successfully!');
       }
@@ -168,7 +134,7 @@ const AdminMenu = () => {
       fetchItems();
       setTimeout(() => setSuccess(''), 3000);
     } catch (err) {
-      console.error(err);
+      console.error('Submit error:', err);
       setError(err.message || 'Failed to save menu item');
     } finally {
       setSubmitting(false);
@@ -177,7 +143,6 @@ const AdminMenu = () => {
 
   const foodItems = items.filter((item) => item.category === 'food');
   const drinkItems = items.filter((item) => item.category === 'drink');
-
   return (
     <div className="admin-menu-page">
       <div className="admin-menu-container">

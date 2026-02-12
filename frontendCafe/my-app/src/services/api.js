@@ -1,34 +1,44 @@
-
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 
 const apiFetch = async (endpoint, options = {}) => {
   const url = `${API_BASE}${endpoint.startsWith('/') ? '' : '/'}${endpoint}`;
 
-  const defaultOptions = {
-    headers: {
-      'Content-Type': 'application/json',
-      
-    },
+  // Prepare headers — only set JSON if not FormData
+  const headers = {
+    ...(options.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
+    ...options.headers,
+  };
+
+  const fetchOptions = {
+    ...options,
+    headers,
+    // Optional: credentials: 'include' if you use cookies/auth later
+    // credentials: 'include',
   };
 
   try {
-    const response = await fetch(url, { ...defaultOptions, ...options });
+    const response = await fetch(url, fetchOptions);
 
+    // Try JSON first, fallback to text
     let data;
+    const text = await response.text(); // read once
     try {
-      data = await response.json();
+      data = JSON.parse(text);
     } catch {
-      data = await response.text();
+      data = text; // keep as string
     }
 
     if (!response.ok) {
-      throw new Error(data.message || `Request failed with status ${response.status}`);
+      // Better error message
+      const errorMessage = data?.message || data || `Request failed with status ${response.status}`;
+      throw new Error(errorMessage);
     }
 
     return data;
   } catch (error) {
     console.error(`API error on ${endpoint}:`, error);
-    throw error; 
+    throw error;
   }
 };
+
 export default apiFetch;

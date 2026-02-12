@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Drink.css';
+import apiFetch from '../../services/api';   // ← import your helper
 
 const DrinkPage = () => {
   const navigate = useNavigate();
@@ -9,17 +10,25 @@ const DrinkPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-    fetch('/api/foods?category=drink')
-      .then(res => res.json())
-      .then(data => setDrinkItems(data))
-      .catch(err => {
-        console.error('Failed to fetch drink items', err);
-        setError('Could not load the menu.');
+    const loadDrinks = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Use apiFetch – it automatically adds the correct base URL
+        const data = await apiFetch('/foods?category=drink');
+
+        setDrinkItems(data || []);
+      } catch (err) {
+        console.error('Failed to fetch drink items:', err);
+        setError(err.message || 'Could not load the drink menu.');
         setDrinkItems([]);
-      })
-      .finally(() => setLoading(false));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDrinks();
   }, []);
 
   return (
@@ -30,11 +39,15 @@ const DrinkPage = () => {
         </button>
         <h2>Our Drink Menu</h2>
       </div>
+
       {loading && <p className="menu-page-message">Loading menu…</p>}
+
       {error && <p className="menu-page-message menu-page-error">{error}</p>}
+
       {!loading && !error && drinkItems.length === 0 && (
         <p className="menu-page-message">No drinks yet. Check back soon.</p>
       )}
+
       {!loading && !error && drinkItems.length > 0 && (
         <div className="menu-grid">
           {drinkItems.map(item => (
