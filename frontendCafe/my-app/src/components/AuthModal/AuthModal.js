@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './AuthModal.css';
+import { apiFetch } from '../../services/api';
 
 const AuthModal = ({ isOpen, onClose, mode = 'login' }) => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
@@ -16,7 +17,7 @@ const AuthModal = ({ isOpen, onClose, mode = 'login' }) => {
     const endpoint = mode === 'signup' ? 'signup' : 'login';
 
     try {
-      const res = await fetch(`/api/${endpoint}`, {
+      const res = await apiFetch(`/api/${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

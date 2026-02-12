@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './AdminMenu.css';
+import { apiFetch } from '../../services/api';
 
 const initialFormState = {
   name: '',
@@ -25,7 +26,7 @@ const AdminMenu = () => {
     try {
       setLoading(true);
       setError('');
-      const res = await fetch(API_BASE);
+      const res = await apiFetch(API_BASE);
       if (!res.ok) {
         throw new Error('Failed to fetch menu items');
       }

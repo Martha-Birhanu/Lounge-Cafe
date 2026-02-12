@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { apiFetch } from '../../services/api';
 
 const BookingHistory = () => {
   const [bookings, setBookings] = useState([]);
@@ -17,7 +18,7 @@ const BookingHistory = () => {
     }
 
     try {
-      const res = await fetch(`/api/bookings/byEmail/${userEmail}`);
+      const res = await apiFetch(`/api/bookings/byEmail/${userEmail}`);
       const data = await res.json();
       setBookings(data);
     } catch (err) {
@@ -31,7 +32,7 @@ const BookingHistory = () => {
 
   const cancelBooking = async referenceCode => {
     try {
-      const res = await fetch('/api/bookings/cancelByCode', {
+      const res = await apiFetch('/api/bookings/cancelByCode', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ referenceCode }),

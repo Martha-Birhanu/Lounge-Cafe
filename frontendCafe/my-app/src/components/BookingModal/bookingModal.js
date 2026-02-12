@@ -31,6 +31,7 @@
 
 import React, { useState } from 'react';
 import './bookingModal.css';
+import { apiFetch } from '../../services/api';
 
 const BookingModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -55,7 +56,7 @@ const BookingModal = ({ isOpen, onClose }) => {
     e.preventDefault();
 
     try {
-      const res = await fetch('/api/bookings', {
+      const res = await apiFetch('/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
