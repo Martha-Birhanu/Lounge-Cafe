@@ -1,0 +1,29 @@
+/* modal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: rgb(128, 124, 124);
+  padding: 2rem;
+  border-radius: 8px;
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 90%;
+  max-width: 600px;
+}
+
+.close-btn {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}

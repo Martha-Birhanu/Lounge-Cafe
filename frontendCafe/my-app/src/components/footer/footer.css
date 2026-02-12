@@ -1,0 +1,33 @@
+.footer {
+  background-color: #222;
+  color: #ccc;
+  padding: 2rem;
+  position: relative;
+  margin-top: 2rem;
+  z-index: 1;
+  font-family: 'Georgia', serif;
+  text-align: center; /* ✅ Center all text */
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center; /* ✅ Center links horizontally */
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: #c49a6c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,84 @@
+.menu-section {
+  padding: 4rem 2rem;
+  background-color: #fdf8f3;
+  font-family: 'Georgia', serif;
+}
+
+.menu-section-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.menu-hero-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.menu-hero-card {
+  position: relative;
+  flex: 1 1 300px;
+  min-height: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: white;
+}
+
+.menu-hero-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent 40%);
+  z-index: 0;
+}
+
+.menu-hero-card h3,
+.menu-hero-card p,
+.menu-hero-card button {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.menu-hero-card h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.menu-hero-card p {
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+  max-width: 85%;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.menu-hero-card button {
+  padding: 0.6rem 1.2rem;
+  background-color: #c49a6c;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-hero-card button:hover {
+  background-color: #a87f4f;
+}
+

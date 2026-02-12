@@ -1,0 +1,63 @@
+.home {
+  height: 100vh;
+  background-image: url('../../assets/images/intro-pic-primary.jpg'); /* Replace with actual image */
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li {
+  cursor: pointer;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+
+.hero-content {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.hero-content h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.book-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #c49a6c;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
