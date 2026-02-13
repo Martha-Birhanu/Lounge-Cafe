@@ -69,6 +69,15 @@ function App() {
         <Route path="/menu/drinks" element={<DrinkPage />} />
         <Route path="/admin/menu" element={<AdminMenu />} />
         <Route path="/my-bookings" element={<BookingHistory />} />
+
+        <Route path="*" element={
+          <div style={{ textAlign: 'center', padding: '100px 20px', minHeight: '70vh' }}>
+          <h1>404 - Page Not Found</h1>
+          <p>Sorry, we couldn't find that page.</p>
+          <p>Current URL: {window.location.pathname}</p> {/* ← shows exact path */}
+          <a href="/">Go back to Home</a>
+          </div>
+        } />
       </Routes>
 
       

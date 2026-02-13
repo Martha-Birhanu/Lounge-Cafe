@@ -16,7 +16,7 @@ const DrinkPage = () => {
         setError(null);
 
         // Use apiFetch – it automatically adds the correct base URL
-        const data = await apiFetch('/foods?category=drink');
+        const data = await apiFetch('/api/foods?category=drink');
 
         setDrinkItems(data || []);
       } catch (err) {

@@ -16,7 +16,7 @@ const FoodPage = () => {
         setError(null);
 
         // Use apiFetch – it handles base URL automatically
-        const data = await apiFetch('/foods?category=food');
+        const data = await apiFetch('/api/foods?category=food');
 
         setFoodItems(data || []);
       } catch (err) {
