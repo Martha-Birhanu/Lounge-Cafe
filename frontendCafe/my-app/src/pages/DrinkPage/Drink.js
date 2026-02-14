@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Drink.css';
-import apiFetch from '../../services/api';   // ← import your helper
+import apiFetch from '../../services/api';  
 
 const DrinkPage = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const DrinkPage = () => {
         setLoading(true);
         setError(null);
 
-        // Use apiFetch – it automatically adds the correct base URL
+        
         const data = await apiFetch('/api/foods?category=drink');
 
         setDrinkItems(data || []);
