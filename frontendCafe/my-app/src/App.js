@@ -65,10 +65,17 @@ function App() {
         } />
 
         
-        <Route path="/menu/food" element={<FoodPage />} />
+        {/* <Route path="/menu/food" element={<FoodPage />} />
         <Route path="/menu/drinks" element={<DrinkPage />} />
         <Route path="/admin/menu" element={<AdminMenu />} />
-        <Route path="/my-bookings" element={<BookingHistory />} />
+        <Route path="/admin/menu/" element={<AdminMenu />} />
+        <Route path="/my-bookings" element={<BookingHistory />} /> */}
+
+        <Route path="/menu/food{/:?}" element={<FoodPage />} />
+        <Route path="/menu/drinks{/:?}" element={<DrinkPage />} />
+        <Route path="/admin/menu{/:?}" element={<AdminMenu />} />
+        <Route path="/my-bookings{/:?}" element={<BookingHistory />} />
+
 
         <Route path="*" element={
           <div style={{ textAlign: 'center', padding: '100px 20px', minHeight: '70vh' }}>
