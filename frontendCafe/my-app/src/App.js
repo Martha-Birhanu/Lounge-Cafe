@@ -65,16 +65,11 @@ function App() {
         } />
 
         
-        {/* <Route path="/menu/food" element={<FoodPage />} />
+        <Route path="/menu/food" element={<FoodPage />} />
         <Route path="/menu/drinks" element={<DrinkPage />} />
         <Route path="/admin/menu" element={<AdminMenu />} />
-        <Route path="/admin/menu/" element={<AdminMenu />} />
-        <Route path="/my-bookings" element={<BookingHistory />} /> */}
+        <Route path="/my-bookings" element={<BookingHistory />} />
 
-        <Route path="/menu/food{/:?}" element={<FoodPage />} />
-        <Route path="/menu/drinks{/:?}" element={<DrinkPage />} />
-        <Route path="/admin/menu{/:?}" element={<AdminMenu />} />
-        <Route path="/my-bookings{/:?}" element={<BookingHistory />} />
 
 
         <Route path="*" element={
