@@ -25,7 +25,7 @@ const AdminMenu = () => {
       setLoading(true);
       setError('');
 
-      const data = await apiFetch('/foods');  // apiFetch adds base URL automatically
+      const data = await apiFetch('/api/foods');  // apiFetch adds base URL automatically
 
       setItems(data);
     } catch (err) {
